@@ -29,6 +29,7 @@ app
     // respond with "hello world" when a GET request is made to the homepage
     .get('/hello', function (req, res) {
     res.write('world');
+    res.write('world');
     res.end();
     })
 
