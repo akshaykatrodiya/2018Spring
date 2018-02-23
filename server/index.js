@@ -16,7 +16,7 @@ console.log("Listening on http://localhost:8080");
 
 // --------------------------------
 
-
+/*
 var express = require('express')
 var app = express()
 
@@ -39,3 +39,18 @@ app
     })
 
     .listen(8080);
+*/
+
+// -----------------------------------class8: devDependencies=nodemon-----------------------------------------
+var express = require('express');
+var app = express();
+
+const serverName = "localhost";
+const port = 8080;
+
+const simple = require('./simpleController')
+
+app.use('/simple',simple).listen(port); //other code in simpleController.js
+
+console.log(`Running on http:// ${serverName} : ${port}`);
+// console.log("running on http://" + serverName + ":" + port);
