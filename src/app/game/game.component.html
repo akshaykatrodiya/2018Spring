@@ -13,9 +13,10 @@
       <div class="card">
           <div class="card-header">Played Quotes</div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+              <li *ngFor="let quote of Model.playedQuotes" class="list-group-item d-flex justify-content-between align-items-center">
+                  {{quote.text}}
+                  <span class="badge badge-light">{{quote.playerName}}</span>
+              </li>
           </ul>
         </div>
     <div class="card">
@@ -26,9 +27,10 @@
       <div class="card">
           <div class="card-header">Other Players</div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+              <li *ngFor="let player of Model.players" class="list-group-item">
+                  <img style="height: 20px; width: 20px" class="rounded">
+                  {{player.name}}
+              </li>
           </ul>
         </div>
   </div>
