@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">My Quotes</div>
       <ul class="list-group list-group-flush">
-        <li *ngFor="let quote of Model.myQuotes" class="list-group-item">
+        <li *ngFor="let quote of Model.myQuotes" class="list-group-item" (click)="submitQuote($event, quote, 'Akshay')">
           {{quote}}
         </li>
       </ul>
