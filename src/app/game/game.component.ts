@@ -10,7 +10,9 @@ export class GameComponent implements OnInit {
 
   Model = new Game();
   Me = new User();
-  constructor() { }
+  constructor() { 
+    this.Me.name = 'Akshay Katrodiya';
+   }
 
   ngOnInit() {
   }
