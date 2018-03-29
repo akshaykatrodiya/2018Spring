@@ -26,7 +26,8 @@ export class GameComponent implements OnInit {
     this.Model.myQuotes.splice( this.Model.myQuotes.indexOf(text), 1);
   }
 
-  myPlayedQuote(): Quote | null {
-    return this.Model.playedQuotes.find( x => x.playerName == this.Me.name );
-  }
+  myPlayedQuote = () => this.Model.playedQuotes.find( x => x.playerName == this.Me.name );
+  chosenQuotes = () => this.Model.playedQuotes.find( x => x.chosen );
+  isEveryOneDone = () => this.Model.playedQuotes.length == this.Model.players.length - 1;
+  iAmTheDealer = () => this.Me.name == this.Model.Dealer;
 }
