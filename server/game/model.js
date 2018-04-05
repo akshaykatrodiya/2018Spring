@@ -1,3 +1,5 @@
+var axios = require("axios");
+
 const quoteStack = [
     "Wisdom is the reward you get for a lifetime of listening when you'd have preferred to talk. -Doug Larson",
     "If you make listening and observation your occupation, you will gain much more than you can by talk. -Robert Baden-Powell",
@@ -103,21 +105,47 @@ const quoteStack = [
 
 var iCurrentQuote = 0;
 
+/*
 const pictureStack = [
-
+    "https://media3.s-nbcnews.com/j/newscms/2018_14/2387596/180404-oklahoma-city-capitol-teacher-protest-ew-323p_93b119734c532d143960db8f96475eaf.focal-1000x500.jpg",
+    "https://media4.s-nbcnews.com/j/newscms/2018_14/2387776/180404-workstation-office-worker-ac-624p_ff6b2bcf00517b752a6d8db3d8324ffc.focal-1000x500.jpg"
 ];
+*/
+
+axios.get('https://api.imgflip.com/get_memes')
+        .then( response => pictureStack = response.data.data.memes )
 
 var iCurrentPicture = 0;
 
 var getQuotes  = () => quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
+
 /*
 class Game {
-    players = [];
-    dealerId = '';
-    playerQuotes = [];
-    pictures = '';
+    constructor() {
+        this.players = [];
+        this.dealerId = null;
+        this.playerQuotes = [];
+        this.pictures = null;
 
-    getQuote = () => quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
+        this.getQuotes = () => quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
+    }
 }
 */
-module.exports.getQuotes = getQuotes;
+
+function Game() {
+        this.players = [];
+        this.dealerId = null;
+        this.playerQuotes = [];
+        this.picture = null;
+
+        this.getQuotes = () => quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
+        this.flipPicture = () => this.picture = pictureStack[iCurrentPicture = (iCurrentPicture+1) % pictureStack.length ];
+
+        this.submitQuote = (text, playerId) => this.playerQuotes.push({ text: text, playerId: playerId });
+        this.chosenQuote = text => {
+            this.playedQuotes.find(x => x.text == text).chosenQuote = true;
+            this.dealerId = this.players[this.dealerId = (this.dealerId+1) % this.players.length];
+        }
+}
+
+module.exports = Game;
