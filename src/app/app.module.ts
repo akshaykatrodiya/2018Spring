@@ -7,6 +7,7 @@ import { NavComponent } from './nav/nav.component';
 import { MessageComponent } from './message/message.component';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
+import { HttpModule } from '@angular/http';
 
 
 const appRoutes: Routes = [
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

@@ -105,12 +105,12 @@ const quoteStack = [
 
 var iCurrentQuote = 0;
 
-/*
-const pictureStack = [
+
+var pictureStack = [
     "https://media3.s-nbcnews.com/j/newscms/2018_14/2387596/180404-oklahoma-city-capitol-teacher-protest-ew-323p_93b119734c532d143960db8f96475eaf.focal-1000x500.jpg",
     "https://media4.s-nbcnews.com/j/newscms/2018_14/2387776/180404-workstation-office-worker-ac-624p_ff6b2bcf00517b752a6d8db3d8324ffc.focal-1000x500.jpg"
 ];
-*/
+
 
 axios.get('https://api.imgflip.com/get_memes')
         .then( response => pictureStack = response.data.data.memes )
@@ -143,7 +143,7 @@ function Game() {
 
         this.submitQuote = (text, playerId) => this.playerQuotes.push({ text: text, playerId: playerId });
         this.chosenQuote = text => {
-            this.playedQuotes.find(x => x.text == text).chosenQuote = true;
+            this.playedQuotes.find(x => x.text == text).chosen = true;
             this.dealerId = this.players[this.dealerId = (this.dealerId+1) % this.players.length];
         }
 }
