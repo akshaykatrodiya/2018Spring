@@ -1,5 +1,3 @@
-
-
 export class Game {
 
     playedQuotes: Quote[] = [
