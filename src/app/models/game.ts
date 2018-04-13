@@ -9,7 +9,9 @@ export class Game {
         { name: 'PalDil Katrodiya', myQuotes: [] },
     ];
     Dealer: string = 'Akshay Katrodiya'
-    picture: string = '../../assets/images/FB_IMG_1511282772818.jpg';
+    picture: {
+        url: string;
+    };
     
 }
 

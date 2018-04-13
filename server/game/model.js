@@ -135,7 +135,7 @@ class Game {
 function Game() {
         this.players = [];
         this.dealerId = null;
-        this.playerQuotes = [];
+        this.playedQuotes = [];
         this.picture = null;
 
         this.getQuotes = () => quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
