@@ -1,14 +1,8 @@
 export class Game {
 
-    playedQuotes: Quote[] = [
-        { text: "That's fake news", playerName: 'Dil Katrodiya', chosen: false}
-    ];
-    players: User[] = [
-        { name: 'Akshay Katrodiya', myQuotes: [] },
-        { name: 'Dil Katrodiya', myQuotes: [] },
-        { name: 'PalDil Katrodiya', myQuotes: [] },
-    ];
-    Dealer: string = 'Akshay Katrodiya'
+    playedQuotes: Quote[] = [];
+    players: User[];
+    dealerId: string;
     picture: {
         url: string;
     };
@@ -24,6 +18,6 @@ export class User {
 export class Quote {
 
     text: string;
-    playerName: string;
+    playerId: string;
     chosen: boolean = false;
 }

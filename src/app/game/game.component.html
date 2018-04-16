@@ -15,14 +15,14 @@
   </div>
   <div class="col-md-8">
       <div class="card">
-          <div class="card-header">Played Quotes</div>
+          <div class="card-header" style="background-color:#28a745">Played Quotes</div>
           <ul class="list-group list-group-flush">
               <li *ngFor="let quote of Model.playedQuotes"
                   [ngClass]="{ 'list-group-item-success': quote.chosen }" 
                   class="list-group-item d-flex justify-content-between align-items-center">
                   {{quote.text}}
                   <span *ngIf="!isEveryOneDone() || (!iAmTheDealer() && !chosenQuotes())" class="badge badge-light">hidden</span>
-                  <span *ngIf="chosenQuotes()" class="badge badge-primary">{{quote.playerName}}</span>
+                  <span *ngIf="chosenQuotes()" class="badge badge-primary">{{quote.playerId}}</span>
                   <button *ngIf="isEveryOneDone() && iAmTheDealer() && !chosenQuotes()"
                           (click)="quote.chosen = true" 
                           class="btn btn-sm btn-primary">
@@ -32,7 +32,7 @@
           </ul>
         </div>
     <div class="card">
-      <img class="card-img" [src]="Model.picture.url" />
+      <img class="card-img" *ngIf="Model.picture" [src]="Model.picture.url" />
       <div class="card-img-overlay" style="text-align:center">
         <button class="btn btn-success btn-lg" (click)="flipPicture($event)">Flip Picture</button>
       </div>

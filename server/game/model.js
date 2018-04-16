@@ -138,10 +138,19 @@ function Game() {
         this.playedQuotes = [];
         this.picture = null;
 
-        this.getQuotes = () => quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
+        this.getQuotes = (playerId) => {
+            if(this.players.some(x=> x.playerId == playerId)){
+
+            } else {
+                this.players.push({ playerId: playerId, name: playerId})
+                return quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
+            }
+            
+
+        } 
         this.flipPicture = () => this.picture = pictureStack[iCurrentPicture = (iCurrentPicture+1) % pictureStack.length ];
 
-        this.submitQuote = (text, playerId) => this.playerQuotes.push({ text: text, playerId: playerId });
+        this.submitQuote = (text, playerId) => this.playedQuotes.push({ text: text, playerId: playerId });
         this.chosenQuote = text => {
             this.playedQuotes.find(x => x.text == text).chosen = true;
             this.dealerId = this.players[this.dealerId = (this.dealerId+1) % this.players.length];

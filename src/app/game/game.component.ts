@@ -15,7 +15,7 @@ export class GameComponent implements OnInit {
   
   constructor(private http: Http) {
     this.Me.name = 'Akshay Katrodiya';
-    http.get(this._api + "/quotes").subscribe(data=> this.Me.myQuotes = data.json())
+    http.get(this._api + "/quotes", {params: { playerId: this.Me.name } }).subscribe(data=> this.Me.myQuotes = data.json())
     setInterval(()=> this.refresh(), 1000)
    }
 
@@ -33,17 +33,23 @@ export class GameComponent implements OnInit {
   }
 
 
-  submitQuote(e: MouseEvent, text: string, playerName: string){
+  submitQuote(e: MouseEvent, text: string, playerId: string){
     e.preventDefault();
 
     if(this.myPlayedQuote()) return;
 
-    this.Model.playedQuotes.push({text: text, playerName: this.Me.name, chosen:false});
-    this.Me.myQuotes.splice( this.Me.myQuotes.indexOf(text), 1);
+    this.http.post(this._api + "/quotes", {text: text, playerId: this.Me.name})
+        .subscribe(data=>{
+          if(data.json().success){
+            this.Me.myQuotes.splice( this.Me.myQuotes.indexOf(text), 1);
+          }
+        });    
+
+    // this.Model.playedQuotes.push();
   }
 
-  myPlayedQuote = () => this.Model.playedQuotes.find( x => x.playerName == this.Me.name );
+  myPlayedQuote = () => this.Model.playedQuotes.find( x => x.playerId == this.Me.name );
   chosenQuotes = () => this.Model.playedQuotes.find( x => x.chosen );
   isEveryOneDone = () => this.Model.playedQuotes.length == this.Model.players.length - 1;
-  iAmTheDealer = () => this.Me.name == this.Model.Dealer;
+  iAmTheDealer = () => this.Me.name == this.Model.dealerId;
 }
