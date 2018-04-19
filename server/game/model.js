@@ -143,10 +143,8 @@ function Game() {
 
             } else {
                 this.players.push({ playerId: playerId, name: playerId})
-                return quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
             }
-            
-
+            return quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
         } 
         this.flipPicture = () => this.picture = pictureStack[iCurrentPicture = (iCurrentPicture+1) % pictureStack.length ];
 

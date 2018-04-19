@@ -1,7 +1,7 @@
 export class Game {
 
     playedQuotes: Quote[] = [];
-    players: User[];
+    players: User[] = [];
     dealerId: string;
     picture: {
         url: string;
