@@ -142,6 +142,10 @@ function Game() {
             if(this.players.some(x=> x.playerId == playerId)){
 
             } else {
+                // When the first user login, they should become the dealer
+                if(this.dealerId==null){
+                    this.dealerId = playerId;
+                }
                 this.players.push({ playerId: playerId, name: playerId})
             }
             return quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);

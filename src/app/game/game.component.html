@@ -9,7 +9,7 @@
     
     <div class="card">
       <!-- <div class="card-header">My Quotes</div> -->
-      <div class="card-header">My Quotes ({{Me.name}}) </div>
+      <div class="card-header" style="background-color:#d4edda">My Quotes ({{Me.name}}) </div>
       <ul class="list-group list-group-flush my-quotes">
         <li *ngFor="let quote of Me.myQuotes" 
           (click)="submitQuote($event, quote)" 
@@ -22,7 +22,7 @@
   </div>
   <div class="col-md-8">
       <div class="card">
-          <div class="card-header" style="background-color:#28a745">Played Quotes</div>
+          <div class="card-header" style="background-color:#d4edda">Played Quotes</div>
           <ul class="list-group list-group-flush">
               <li *ngFor="let quote of Model.playedQuotes"
                   [ngClass]="{ 'list-group-item-success': quote.chosen }" 
@@ -47,7 +47,7 @@
   </div>
   <div class="col-md-4">
       <div class="card">
-          <div class="card-header">Other Players</div>
+          <div class="card-header">Other Players & Dealer is: {{Model.dealerId}}</div>
           <ul class="list-group list-group-flush">
               <li *ngFor="let player of Model.players" class="list-group-item">
                   <img style="height: 20px; width: 20px" class="rounded">

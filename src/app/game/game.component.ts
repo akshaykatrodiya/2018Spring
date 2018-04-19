@@ -29,29 +29,39 @@ export class GameComponent implements OnInit {
   }
 
   flipPicture(e: MouseEvent){
-    this.http.post(this._api + "/picture", {})
-        .subscribe();
+    // Only allow the dealer to flip the picture and only before user start submitting quotes
+    if(this.iAmTheDealer() && this.Model.playedQuotes.length==0){
+      if(this.Me.name==this.Model.dealerId){
+
+      }
+      this.http.post(this._api + "/picture", {})
+          .subscribe();
+    }
   }
 
 
   submitQuote(e: MouseEvent, text: string, playerId: string){
     e.preventDefault();
 
-    if(this.myPlayedQuote()) return;
+    // The dealer should not be able to submit the quote
+    if(this.iAmTheDealer()){
 
-    this.http.post(this._api + "/quotes", {text: text, playerId: this.Me.name})
+    } else {
+      if(this.myPlayedQuote()) return;
+
+      this.http.post(this._api + "/quotes", {text: text, playerId: this.Me.name})
         .subscribe(data=>{
           if(data.json().success){
             this.Me.myQuotes.splice( this.Me.myQuotes.indexOf(text), 1);
           }
-        });    
-
-    // this.Model.playedQuotes.push();
+        });
+    }
   }
 
   login(name: string){
     this.http.get(this._api + "/quotes", { params: {playerId: name} })
-    .subscribe(data=> this.Me = {name: name, myQuotes: data.json()})
+    .subscribe(data=> this.Me = {name: name, myQuotes: data.json()});
+   
   }
 
   myPlayedQuote = () => this.Model.playedQuotes.find( x => x.playerId == this.Me.name );
