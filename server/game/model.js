@@ -142,11 +142,7 @@ function Game() {
             if(this.players.some(x=> x.playerId == playerId)){
 
             } else {
-                // When the first user login, they should become the dealer
-                if(this.dealerId==null){
-                    this.dealerId = playerId;
-                }
-                this.players.push({ playerId: playerId, name: playerId})
+                this.players.push({ playerId: playerId, name: playerId, score: 0 })
             }
             return quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
         } 
@@ -158,7 +154,9 @@ function Game() {
             this.playedQuotes.push({ text: text, playerId: playerId });
         }
         this.chosenQuote = text => {
-            this.playedQuotes.find(x => x.text == text).chosen = true;
+            const chosenQuote = this.playedQuotes.find(x=> x.text == text);
+            chosenQuote.chosen = true;
+            this.players.find(x=> x.playerId == chosenQuote.playerId).score++;
             this.dealerId = this.players[this.players.findIndex(x=> x.playerId == this.dealerId)  + 1 % this.players.length ].playerId;
         }
 }
