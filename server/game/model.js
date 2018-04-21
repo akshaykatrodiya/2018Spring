@@ -146,7 +146,10 @@ function Game() {
             }
             return quoteStack.slice(iCurrentQuote, iCurrentQuote+=7);
         } 
-        this.flipPicture = () => this.picture = pictureStack[iCurrentPicture = (iCurrentPicture+1) % pictureStack.length ];
+        this.flipPicture = () => {
+            this.picture = pictureStack[iCurrentPicture = (iCurrentPicture+1) % pictureStack.length ];
+            this.playedQuotes = [];
+        } 
 
         this.submitQuote = (text, playerId) => {
             // The dealer should not be able to submit the quote
