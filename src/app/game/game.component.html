@@ -13,7 +13,7 @@
       <ul class="list-group list-group-flush my-quotes">
         <li *ngFor="let quote of Me.myQuotes" 
           (click)="submitQuote($event, quote)" 
-          [ngClass]="{ enabled: !myPlayedQuote() }"
+          [ngClass]="{ enabled: !myPlayedQuote() && !iAmTheDealer() }"
           class="list-group-item">
           {{quote}}
         </li>

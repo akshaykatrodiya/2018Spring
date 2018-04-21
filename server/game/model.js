@@ -152,7 +152,11 @@ function Game() {
         } 
         this.flipPicture = () => this.picture = pictureStack[iCurrentPicture = (iCurrentPicture+1) % pictureStack.length ];
 
-        this.submitQuote = (text, playerId) => this.playedQuotes.push({ text: text, playerId: playerId });
+        this.submitQuote = (text, playerId) => {
+            // The dealer should not be able to submit the quote
+            if(playerId == this.DealerId) throw Error("Dealer can't submit a quote");
+            this.playedQuotes.push({ text: text, playerId: playerId });
+        }
         this.chosenQuote = text => {
             this.playedQuotes.find(x => x.text == text).chosen = true;
             this.dealerId = this.players[this.dealerId = (this.dealerId+1) % this.players.length];

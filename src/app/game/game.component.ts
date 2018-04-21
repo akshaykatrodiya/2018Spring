@@ -44,18 +44,16 @@ export class GameComponent implements OnInit {
     e.preventDefault();
 
     // The dealer should not be able to submit the quote
-    if(this.iAmTheDealer()){
-
-    } else {
-      if(this.myPlayedQuote()) return;
+      if(this.myPlayedQuote() || this.iAmTheDealer()) return;
 
       this.http.post(this._api + "/quotes", {text: text, playerId: this.Me.name})
         .subscribe(data=>{
           if(data.json().success){
             this.Me.myQuotes.splice( this.Me.myQuotes.indexOf(text), 1);
           }
+        }, err=> {
+          console.log(err);
         });
-    }
   }
 
   login(name: string){

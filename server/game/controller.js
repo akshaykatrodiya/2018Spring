@@ -12,8 +12,13 @@ module.exports = app
     .get('/state', (req, res) => res.send(game) )
     .post('/picture', (req, res) => res.send( game.flipPicture() ) )
     .post('/quotes', (req, res) => {
-        console.log(req.body)
-        game.submitQuote(req.body.text, req.body.playerId)
+        // The dealer should not be able to submit the quote
+        try {
+            console.log(req.body);
+            game.submitQuote(req.body.text, req.body.playerId);
+        } catch {
+            res.status(403).send({success: false, message: error.message})
+        }
         // res.send( game.flipPicture() )
         req.send({ success: true }) 
     })
