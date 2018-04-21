@@ -52,6 +52,8 @@
               <li *ngFor="let player of Model.players" class="list-group-item">
                   <img style="height: 20px; width: 20px" class="rounded">
                   {{player.name}}
+                  <i class="badge float-right" [ngClass]="player.playerId == Model.dealerId ? 'badge-warning' : 'badge-info'">
+                  </i>
               </li>
           </ul>
         </div>

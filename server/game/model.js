@@ -159,7 +159,7 @@ function Game() {
         }
         this.chosenQuote = text => {
             this.playedQuotes.find(x => x.text == text).chosen = true;
-            this.dealerId = this.players[this.dealerId = (this.dealerId+1) % this.players.length];
+            this.dealerId = this.players[this.players.findIndex(x=> x.playerId == this.dealerId)  + 1 % this.players.length ].playerId;
         }
 }
 
