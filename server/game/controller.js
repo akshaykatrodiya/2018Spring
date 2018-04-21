@@ -22,3 +22,11 @@ module.exports = app
         // res.send( game.flipPicture() )
         req.send({ success: true }) 
     })
+    .post('/quotes/choose', (req, res) => {
+        if(req.body.playerId != game.dealerId){
+            res.status(403).send({ success: false, message: "Only the dealer can choose a quote" });
+        }else{
+            game.chosenQuote(req.body.Text);
+            res.send( { success: true } );
+        }
+    })
