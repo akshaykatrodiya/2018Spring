@@ -153,7 +153,7 @@ function Game() {
 
         this.submitQuote = (text, playerId) => {
             // The dealer should not be able to submit the quote
-            if(playerId == this.DealerId) throw Error("Dealer can't submit a quote");
+            if(playerId == this.dealerId) throw Error("Dealer can't submit a quote");
             this.playedQuotes.push({ text: text, playerId: playerId });
         }
         this.chosenQuote = text => {

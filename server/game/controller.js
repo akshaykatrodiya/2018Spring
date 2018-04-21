@@ -27,7 +27,7 @@ module.exports = app
         if(req.body.playerId != game.dealerId){
             res.status(403).send({ success: false, message: "Only the dealer can choose a quote" });
         }else{
-            game.chosenQuote(req.body.Text);
+            game.chosenQuote(req.body.text);
             res.send( { success: true } );
         }
     })

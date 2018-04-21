@@ -49,7 +49,7 @@ export class GameComponent implements OnInit {
     }
 
 
-  submitQuote(e: MouseEvent, text: string, playerId: string){
+  submitQuote(e: MouseEvent, text: string){
     e.preventDefault();
 
     // The dealer should not be able to submit the quote
