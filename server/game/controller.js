@@ -12,15 +12,16 @@ module.exports = app
     .get('/state', (req, res) => res.send(game) )
     .post('/picture', (req, res) => res.send( game.flipPicture() ) )
     .post('/quotes', (req, res) => {
+        console.log(req.body);
         // The dealer should not be able to submit the quote
         try {
-            console.log(req.body);
-            game.submitQuote(req.body.text, req.body.playerId);
-        } catch {
+            game.submitQuote(req.body.Text, req.body.PlayerId);
+            req.send({ success: true });
+        } catch(error) {
             res.status(403).send({success: false, message: error.message})
         }
         // res.send( game.flipPicture() )
-        req.send({ success: true }) 
+        
     })
     .post('/quotes/choose', (req, res) => {
         if(req.body.playerId != game.dealerId){

@@ -39,6 +39,15 @@ export class GameComponent implements OnInit {
     }
   }
 
+  chooseQuote(e: MouseEvent, quote: Quote){
+    e.preventDefault();
+    this.http.post(this._api + "/quotes/choose", { text: quote.text, playerId: this.Me.name })
+      .subscribe(data=> {
+      }, err=> {
+        console.log(err);
+      });
+    }
+
 
   submitQuote(e: MouseEvent, text: string, playerId: string){
     e.preventDefault();
