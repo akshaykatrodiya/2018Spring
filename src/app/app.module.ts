@@ -8,6 +8,7 @@ import { MessageComponent } from './message/message.component';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
 import { HttpModule } from '@angular/http';
+import { MessagesService } from './services/messages.service';
 
 
 const appRoutes: Routes = [
@@ -29,7 +30,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [MessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

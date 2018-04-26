@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, text } from '@angular/core';
 import { Http } from "@angular/http";
 import { Game, User, Quote } from '../models/game';
+import { MessagesService } from '../services/messages.service';
 
 @Component({
   selector: 'app-game',
@@ -14,7 +15,7 @@ export class GameComponent implements OnInit {
   Me: User;
   private _api = "http://localhost:8080/game";
   
-  constructor(private http: Http) {
+  constructor(private http: Http, private _messages: MessagesService) {
     // this.Me.name = 'Akshay Katrodiya';
     // http.get(this._api + "/quotes", {params: { playerId: this.Me.name } }).subscribe(data=> this.Me.myQuotes = data.json())
     setInterval(()=> this.refresh(), 1000)
@@ -29,6 +30,7 @@ export class GameComponent implements OnInit {
   }
 
   flipPicture(e: MouseEvent){
+    this._messages.Messages.push({text: "Picture flipped", type: 'success'})
     // Only allow the dealer to flip the picture and only before user start submitting quotes
     if(this.iAmTheDealer() && this.Model.playedQuotes.length==0){
       if(this.Me.name==this.Model.dealerId){
@@ -55,6 +57,7 @@ export class GameComponent implements OnInit {
     // The dealer should not be able to submit the quote at the client side at first place
       if(this.myPlayedQuote() || this.iAmTheDealer()) return;
 
+      this._messages.Messages.push({text: "Submitted Quote", type: 'success'})
       this.http.post(this._api + "/quotes", {text: text, playerId: this.Me.name})
         .subscribe(data=>{
           if(data.json().success){
@@ -66,6 +69,7 @@ export class GameComponent implements OnInit {
   }
 
   login(name: string){
+    this._messages.Messages.push({text: "You\'ve Logged in. Welcome "+ name, type: 'success'})
     this.http.get(this._api + "/quotes", { params: {playerId: name} })
     .subscribe(data=> this.Me = {name: name, myQuotes: data.json()});
    
