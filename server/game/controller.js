@@ -13,9 +13,9 @@ module.exports = app
     .post('/picture', (req, res) => res.send( game.flipPicture() ) )
     .post('/quotes', (req, res) => {
         console.log(req.body);
-        // The dealer should not be able to submit the quote
+        // Catch the error even if dealer submit the quote and on the server side 
         try {
-            game.submitQuote(req.body.Text, req.body.PlayerId);
+            game.submitQuote(req.body.text, req.body.playerId);
             req.send({ success: true });
         } catch(error) {
             res.status(403).send({success: false, message: error.message})
@@ -27,7 +27,7 @@ module.exports = app
         if(req.body.playerId != game.dealerId){
             res.status(403).send({ success: false, message: "Only the dealer can choose a quote" });
         }else{
-            game.chosenQuote(req.body.text);
+            game.chooseQuote(req.body.text);
             res.send( { success: true } );
         }
     })

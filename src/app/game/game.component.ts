@@ -52,7 +52,7 @@ export class GameComponent implements OnInit {
   submitQuote(e: MouseEvent, text: string){
     e.preventDefault();
 
-    // The dealer should not be able to submit the quote
+    // The dealer should not be able to submit the quote at the client side at first place
       if(this.myPlayedQuote() || this.iAmTheDealer()) return;
 
       this.http.post(this._api + "/quotes", {text: text, playerId: this.Me.name})

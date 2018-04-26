@@ -156,7 +156,7 @@ function Game() {
             if(playerId == this.dealerId) throw Error("Dealer can't submit a quote");
             this.playedQuotes.push({ text: text, playerId: playerId });
         }
-        this.chosenQuote = text => {
+        this.chooseQuote = text => {
             const chosenQuote = this.playedQuotes.find(x=> x.text == text);
             chosenQuote.chosen = true;
             this.players.find(x=> x.playerId == chosenQuote.playerId).score++;
