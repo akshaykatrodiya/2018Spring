@@ -9,12 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
 import { HttpModule } from '@angular/http';
 import { MessagesService } from './services/messages.service';
+import { GameService } from './services/game.service';
+import { LoginComponent } from './login/login.component';
 
 
 const appRoutes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
   {path:'home', component:HomeComponent},
-  {path:'game', component:GameComponent}
+  {path:'game', component:GameComponent},
+  {path:'login', component:LoginComponent}
 ];
 
 @NgModule({
@@ -23,14 +26,15 @@ const appRoutes: Routes = [
     NavComponent,
     MessageComponent,
     HomeComponent,
-    GameComponent
+    GameComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [MessagesService],
+  providers: [MessagesService, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

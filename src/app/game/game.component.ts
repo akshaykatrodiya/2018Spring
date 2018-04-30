@@ -1,7 +1,9 @@
-import { Component, OnInit, text } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from "@angular/http";
 import { Game, User, Quote } from '../models/game';
 import { MessagesService } from '../services/messages.service';
+import { GameService } from '../services/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -15,9 +17,18 @@ export class GameComponent implements OnInit {
   Me: User;
   private _api = "http://localhost:8080/game";
   
-  constructor(private http: Http, private _messages: MessagesService) {
+  constructor(private http: Http, 
+    private _messages: MessagesService, 
+    private _game: GameService, 
+    private _router: Router
+  ) {
     // this.Me.name = 'Akshay Katrodiya';
     // http.get(this._api + "/quotes", {params: { playerId: this.Me.name } }).subscribe(data=> this.Me.myQuotes = data.json())
+    this.Me = _game.Me;
+    if(!this.Me){
+      _router.navigate(['/login']);
+    }
+    this.join(this.Me.name)
     setInterval(()=> this.refresh(), 1000)
    }
 
@@ -68,10 +79,10 @@ export class GameComponent implements OnInit {
         });
   }
 
-  login(name: string){
-    this._messages.Messages.push({text: "You\'ve Logged in. Welcome "+ name, type: 'success'})
+  join(name: string){
+    this._messages.Messages.push({text: "You\'ve joined this game. Welcome "+ name, type: 'success'})
     this.http.get(this._api + "/quotes", { params: {playerId: name} })
-    .subscribe(data=> this.Me = {name: name, myQuotes: data.json()});
+    .subscribe(data=> this.Me.myQuotes = data.json() );
    
   }
 
