@@ -9,7 +9,7 @@ export class MessagesService {
     this.Messages = [
 
       { text: 'This is intialized in the service.', type: 'success' },
-      { text: 'The second message.', type: 'danger' }
+      { text: 'A second message.', type: 'danger' }
       
     ];
 

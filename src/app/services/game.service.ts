@@ -2,12 +2,20 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { MessagesService } from './messages.service';
 import { User } from '../models/game';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GameService {
 
   Me: User;
-  constructor(private http: Http, private _messages: MessagesService) { 
+  token:string;
+  pic:string;
+
+  constructor(
+    private http: Http, 
+    private _messages: MessagesService,
+    private _router: Router
+  ) { 
 
    }
    
@@ -15,6 +23,14 @@ export class GameService {
      if(password == '123'){
        // Log the user in
        this.Me = {name: name, myQuotes: [] };
+       this._router.navigate(['/game']);
      }
+   }
+
+   oAuthLogin(name: string, token:string, pic: string){
+    this.Me = {name: name, myQuotes: [] };
+    this.pic = pic;
+    this.token = token;
+    this._router.navigate(['/game']);
    }
 }

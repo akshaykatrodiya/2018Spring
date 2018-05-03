@@ -138,7 +138,11 @@ function Game() {
         this.playedQuotes = [];
         this.picture = null;
 
+        // This is our login function. It s the function that gets called when a user sends joins for the first time.
         this.getQuotes = (playerId) => {
+            if(!this.dealerId){
+                this.dealerId = playerId;
+            }
             if(this.players.some(x=> x.playerId == playerId)){
 
             } else {

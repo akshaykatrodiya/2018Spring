@@ -17,7 +17,8 @@ export class GameComponent implements OnInit {
   Me: User;
   private _api = "http://localhost:8080/game";
   
-  constructor(private http: Http, 
+  constructor(
+    private http: Http, 
     private _messages: MessagesService, 
     private _game: GameService, 
     private _router: Router
@@ -68,7 +69,7 @@ export class GameComponent implements OnInit {
     // The dealer should not be able to submit the quote at the client side at first place
       if(this.myPlayedQuote() || this.iAmTheDealer()) return;
 
-      this._messages.Messages.push({text: "Submitted Quote", type: 'success'})
+      this._messages.Messages.push({text: 'Quote submitted' + text, type: 'success'})
       this.http.post(this._api + "/quotes", {text: text, playerId: this.Me.name})
         .subscribe(data=>{
           if(data.json().success){
@@ -80,10 +81,9 @@ export class GameComponent implements OnInit {
   }
 
   join(name: string){
-    this._messages.Messages.push({text: "You\'ve joined this game. Welcome "+ name, type: 'success'})
+    this._messages.Messages.push({text: 'You\'ve joined this game. Welcome ' + name, type: 'success'})
     this.http.get(this._api + "/quotes", { params: {playerId: name} })
     .subscribe(data=> this.Me.myQuotes = data.json() );
-   
   }
 
   myPlayedQuote = () => this.Model.playedQuotes.find( x => x.playerId == this.Me.name );

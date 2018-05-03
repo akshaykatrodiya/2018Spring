@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameComponent } from '../game/game.component';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(public Game:GameComponent) { }
 
   ngOnInit() {
   }

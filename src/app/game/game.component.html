@@ -1,9 +1,6 @@
 <div class="row">
 
-  <div class="row">
-
   <div class="col-md-4">
-    
     <div class="card">
       <!-- <div class="card-header">My Quotes</div> -->
       <div class="card-header" style="background-color:#d4edda">My Quotes ({{Me.name}}) </div>
@@ -17,24 +14,27 @@
       </ul>
     </div>
   </div>
+
   <div class="col-md-8">
-      <div class="card">
-          <div class="card-header" style="background-color:#d4edda">Played Quotes</div>
-          <ul class="list-group list-group-flush">
-              <li *ngFor="let quote of Model.playedQuotes"
-                  [ngClass]="{ 'list-group-item-success': quote.chosen }" 
-                  class="list-group-item d-flex justify-content-between align-items-center">
-                  {{quote.text}}
-                  <span *ngIf="!isEveryOneDone() || (!iAmTheDealer() && !chosenQuotes())" class="badge badge-light">hidden</span>
-                  <span *ngIf="chosenQuotes()" class="badge badge-primary">{{quote.playerId}}</span>
-                  <button *ngIf="isEveryOneDone() && iAmTheDealer() && !chosenQuotes()"
-                          (click)="chooseQuote($event, quote)" 
-                          class="btn btn-sm btn-primary">
-                          Choose
-                  </button>
-              </li>
-          </ul>
-        </div>
+
+    <div class="card">
+      <div class="card-header" style="background-color:#d4edda">Played Quotes</div>
+      <ul class="list-group list-group-flush">
+          <li *ngFor="let quote of Model.playedQuotes"
+              [ngClass]="{ 'list-group-item-success': quote.chosen }" 
+              class="list-group-item d-flex justify-content-between align-items-center">
+              {{quote.text}}
+              <span *ngIf="!isEveryOneDone() || (!iAmTheDealer() && !chosenQuotes())" class="badge badge-light">hidden</span>
+              <span *ngIf="chosenQuotes()" class="badge badge-primary">{{quote.playerId}}</span>
+              <button *ngIf="isEveryOneDone() && iAmTheDealer() && !chosenQuotes()"
+                      (click)="chooseQuote($event, quote)" 
+                      class="btn btn-sm btn-primary">
+                      Choose
+              </button>
+          </li>
+      </ul>
+    </div>
+
     <div class="card">
       <img class="card-img" *ngIf="Model.picture" [src]="Model.picture.url" />
       <div class="card-img-overlay" style="text-align:center">
@@ -45,7 +45,9 @@
         </button>
       </div>
     </div>
+
   </div>
+
   <div class="col-md-4">
       <div class="card">
           <div class="card-header">Other Players & Dealer is: {{Model.dealerId}}</div>
@@ -58,6 +60,6 @@
                   </i>
               </li>
           </ul>
-        </div>
+      </div>
   </div>
 </div>
