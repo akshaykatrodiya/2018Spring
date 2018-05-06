@@ -161,9 +161,9 @@ function Game() {
             this.playedQuotes.push({ text: text, playerId: playerId });
         }
         this.chooseQuote = text => {
-            const chosenQuote = this.playedQuotes.find(x=> x.text == text);
-            chosenQuote.chosen = true;
-            this.players.find(x=> x.playerId == chosenQuote.playerId).score++;
+            const chosenQuotes = this.playedQuotes.find(x=> x.text == text);
+            chosenQuotes.chosen = true;
+            this.players.find(x=> x.playerId == chosenQuotes.playerId).score++;
             this.dealerId = this.players[this.players.findIndex(x=> x.playerId == this.dealerId)  + 1 % this.players.length ].playerId;
         }
 }

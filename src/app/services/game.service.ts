@@ -30,7 +30,7 @@ export class GameService {
    oAuthLogin(name: string, token:string, pic: string){
     this.Me = {name: name, myQuotes: [] };
     this.pic = pic;
-    this.token = token;
+    this.token = token; 
     this._router.navigate(['/game']);
    }
 }

@@ -40,7 +40,7 @@
       <div class="card-img-overlay" style="text-align:center">
         <button class="btn btn-success btn-lg" 
           (click)="flipPicture($event)"
-          *ngIf="iAmTheDealer() && (Model.playedQuotes.length == 0 || chosenQuote())">
+          *ngIf="iAmTheDealer() && (Model.playedQuotes.length == 0 || chosenQuotes())">
           Flip the Picture
         </button>
       </div>
